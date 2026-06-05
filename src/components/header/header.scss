@@ -1,0 +1,27 @@
+@use "../../styles/variables.scss" as *;
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &__portal {
+    font-weight: 700;
+    font-size: 28px;
+    color: #000;
+    span {
+      color: $green;
+    }
+  }
+  &__links {
+    display: flex;
+    column-gap: 8px;
+    align-items: center;
+  }
+  &__link,
+  &__divider {
+    font-weight: 700;
+    font-size: 24px;
+    color: #000;
+  }
+}
