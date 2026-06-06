@@ -10,6 +10,8 @@ import rick from "../../assets/img/Rick.png";
 import logo from "../../assets/img/RickMortyLogo.png";
 
 function RandomChar() {
+  const _wikiPath = "https://rickandmorty.fandom.com/wiki/";
+
   const [char, setChar] = useState({});
 
   const { loading, error, clearError, getCharacter } = useRickAndMorty();
@@ -27,7 +29,8 @@ function RandomChar() {
 
   const errorMessage = error && !loading ? <ErrorMessage /> : null;
   const spinner = loading ? <Spinner /> : null;
-  const content = !loading && !error ? <View char={char} /> : null;
+  const content =
+    !loading && !error ? <View char={char} wiki={_wikiPath} /> : null;
 
   return (
     <div className="randomchar">
@@ -53,7 +56,7 @@ function RandomChar() {
   );
 }
 
-function View({ char }) {
+function View({ char, wiki }) {
   return (
     <div className="randomchar__left">
       <img src={char.image} alt={char.name} className="randomchar__img" />
@@ -63,13 +66,20 @@ function View({ char }) {
           {char.species} - {char.status}
         </div>
         <div className="randomchar__links">
-          <a href="#" className="randomchar__homepage">
+          <a
+            href={`https://rickandmortyapi.com/api/character/${char.id}`}
+            className="randomchar__homepage"
+            target="_blank"
+            rel="noreferrer"
+          >
             Homepage
           </a>
 
           <a
-            href={`https://rickandmortyapi.com/api/character/${char.id}`}
             className="randomchar__wiki"
+            href={`${wiki}${char.name}`}
+            target="_blank"
+            rel="noreferrer"
           >
             Wiki
           </a>
