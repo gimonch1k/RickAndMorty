@@ -1,0 +1,74 @@
+@use "../../styles/variables.scss" as *;
+@use "../../styles/button.scss" as *;
+
+.randomchar {
+  margin-top: 50px;
+  display: flex;
+  box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
+  min-height: 250px;
+  &__left {
+    width: 50%;
+    padding: 35px 40px;
+    display: flex;
+    column-gap: 30px;
+  }
+  &__img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+  }
+  &__description {
+    position: relative;
+  }
+  &__name {
+    font-weight: 700;
+    font-size: 22px;
+  }
+  &__about {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  &__links {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    column-gap: 30px;
+  }
+  &__wiki {
+    @include btn;
+    background-color: $light-gray;
+  }
+  &__homepage {
+    @include btn;
+    background-color: $green;
+  }
+  &__right {
+    position: relative;
+    width: 50%;
+    padding: 35px 40px;
+    background-color: $dark-gray;
+  }
+  &__text {
+    font-weight: 700;
+    font-size: 22px;
+    color: $white;
+    &:last-of-type {
+      margin-top: 40px;
+    }
+  }
+  &__logo {
+    width: 200px;
+    height: 117px;
+    object-fit: cover;
+    position: absolute;
+    bottom: 15px;
+    right: 0;
+  }
+  &__try {
+    position: absolute;
+    @include btn;
+    background-color: $green;
+    bottom: 35px;
+  }
+}

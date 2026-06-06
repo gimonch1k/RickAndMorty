@@ -1,5 +1,7 @@
+import RandomChar from "../randomChar/RandomChar";
+
 function MainPage() {
-  return <h2>Hello, World!</h2>;
+  return <RandomChar />;
 }
 
 export default MainPage;
