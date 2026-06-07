@@ -6,7 +6,6 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./randomChar.scss";
 
-import rick from "../../assets/img/Rick.png";
 import logo from "../../assets/img/RickMortyLogo.png";
 
 function RandomChar() {
