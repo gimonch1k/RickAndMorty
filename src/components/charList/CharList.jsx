@@ -2,40 +2,38 @@ import { useEffect, useState } from "react";
 
 import useRickAndMorty from "../../services/RickAndMorty";
 import Spinner from "../spinner/Spinner";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./charList.scss";
 
-import rick from "../../assets/img/Rick.png";
-
 function CharList() {
   const [chars, setChars] = useState([]);
-  const [offset, setOffset] = useState(0);
+  const [page, setPage] = useState(1);
+  const [offset, setOffset] = useState(9);
   const [charsLoading, setCharsLoading] = useState(false);
-  const [charsEnded, setCharsEnded] = useState(false);
 
   const { loading, error, getCharacters } = useRickAndMorty();
 
+  console.log("render");
+
   useEffect(() => {
-    onRequest(offset);
+    onRequest(page);
   }, []);
 
-  const onRequest = (offset) => {
+  const onRequest = (page) => {
     setCharsLoading(true);
-    getCharacters(offset).then((newChars) => onLoadChars(newChars, offset));
+    getCharacters(page).then(onLoadChars);
   };
 
-  const onLoadChars = (newChars, offset) => {
-    const end = newChars.length < 9;
-
+  const onLoadChars = (newChars) => {
     setChars((prevChars) =>
-      offset === 0 ? newChars : [...prevChars, ...newChars],
+      chars.length === 0 ? newChars : [...prevChars, ...newChars],
     );
 
-    setCharsEnded(end);
     setCharsLoading(false);
   };
 
-  const cards = chars.map((character) => (
+  const cards = chars.slice(0, offset).map((character) => (
     <li className="charlist__card" key={character.id}>
       <img
         src={character.image}
@@ -47,22 +45,30 @@ function CharList() {
     </li>
   ));
 
-  const spinner = loading ? <Spinner /> : null;
+  const spinner = loading && chars.length === 0 ? <Spinner /> : null;
+  const errorMessage = error ? <ErrorMessage /> : null;
 
   return (
     <div className="charlist">
       <ul className="charlist__cards">
         {cards}
         {spinner}
+        {errorMessage}
       </ul>
       <button
         className="charlist__btn"
-        style={{ display: chars.length === 0 || charsEnded ? "none" : "block" }}
+        style={{ display: chars.length === 0 ? "none" : "block" }}
         disabled={charsLoading}
         onClick={() => {
           const newOffset = offset + 9;
+
           setOffset(newOffset);
-          onRequest(newOffset);
+
+          if (newOffset >= chars.length) {
+            const newPage = page + 1;
+            setPage(newPage);
+            onRequest(newPage);
+          }
         }}
       >
         Load more

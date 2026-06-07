@@ -10,9 +10,9 @@ function useRickAndMorty() {
     return _tranformCharacter(data);
   };
 
-  const getCharacters = async (offset = 0, page = 1) => {
+  const getCharacters = async (page = 1) => {
     const data = await request(`${_apiPath}character/?page=${page}`);
-    return data.results.slice(offset, offset + 9).map(_tranformCharacter);
+    return data.results.map(_tranformCharacter);
   };
 
   const _tranformCharacter = (character) => {
