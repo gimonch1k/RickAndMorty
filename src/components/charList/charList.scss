@@ -2,8 +2,7 @@
 @use "../../styles/button.scss" as *;
 
 .charlist {
-  max-width: 650px;
-  margin-top: 50px;
+  width: 650px;
   &__cards {
     display: flex;
     flex-wrap: wrap;

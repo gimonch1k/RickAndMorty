@@ -22,6 +22,7 @@ function useRickAndMorty() {
       status: character.status,
       species: character.species,
       image: character.image,
+      episode: character.episode,
     };
   };
 

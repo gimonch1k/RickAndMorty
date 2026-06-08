@@ -1,0 +1,56 @@
+@use "../../styles/variables.scss" as *;
+
+.skeleton {
+  width: 425px;
+  border-radius: 5px;
+  padding: 25px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+  &__title {
+    font-size: 17px;
+    text-align: center;
+  }
+  &__header {
+    margin-top: 33px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    &-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 100%;
+      background-color: #c4c4c4;
+    }
+    &-rect {
+      flex: 1;
+      height: 16px;
+      background-color: #c4c4c4;
+    }
+  }
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    &-rect {
+      margin-top: 15px;
+      height: 35px;
+      background-color: #c4c4c4;
+    }
+  }
+}
+
+// @media screen and (min-width: 425px) {
+//   .skeleton {
+//     width: 405px;
+//   }
+// }
+
+// @media screen and (min-width: 568px) {
+//   .skeleton {
+//     width: 450px;
+//   }
+// }
+
+// @media screen and (min-width: 1024px) {
+//   .skeleton {
+//     width: 320px;
+//   }
+// }

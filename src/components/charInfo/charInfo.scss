@@ -1,0 +1,47 @@
+@use "../../styles/variables.scss" as *;
+@use "../../styles/button.scss" as *;
+
+.charinfo {
+  width: 425px;
+  padding: 25px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+  &__persone {
+    display: flex;
+    column-gap: 25px;
+  }
+  &__img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  &__name {
+    font-weight: 700;
+    font-size: 22px;
+  }
+  &__homepage {
+    max-width: 110px;
+    margin-top: 35px;
+    @include btn;
+    background-color: $green;
+  }
+  &__wiki {
+    max-width: 110px;
+    margin-top: 10px;
+    @include btn;
+    background-color: $light-gray;
+  }
+  &__descr {
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  h3 {
+    margin-top: 10px;
+  }
+  &__episode {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+}

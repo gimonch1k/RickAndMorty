@@ -6,15 +6,13 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./charList.scss";
 
-function CharList() {
+function CharList({ onSelectedChar }) {
   const [chars, setChars] = useState([]);
   const [page, setPage] = useState(1);
   const [offset, setOffset] = useState(9);
   const [charsLoading, setCharsLoading] = useState(false);
 
   const { loading, error, getCharacters } = useRickAndMorty();
-
-  console.log("render");
 
   useEffect(() => {
     onRequest(page);
@@ -34,7 +32,11 @@ function CharList() {
   };
 
   const cards = chars.slice(0, offset).map((character) => (
-    <li className="charlist__card" key={character.id}>
+    <li
+      className="charlist__card"
+      key={character.id}
+      onClick={() => onSelectedChar(character.id)}
+    >
       <img
         src={character.image}
         alt={character.name}
