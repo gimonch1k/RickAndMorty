@@ -12,14 +12,20 @@ function MainPage() {
       <RandomChar />
       <section
         style={{
+          position: "relative",
           marginTop: "50px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "flex-start",
         }}
       >
-        <CharList onSelectedChar={setSelectedChar} />
-        <CharInfo selectedId={selectedChar} />
+        <CharList
+          onSelectedChar={setSelectedChar}
+          selectedChar={selectedChar}
+        />
+        <div style={{ position: "sticky", top: "50px", width: "425px" }}>
+          <CharInfo selectedId={selectedChar} />
+        </div>
       </section>
     </>
   );

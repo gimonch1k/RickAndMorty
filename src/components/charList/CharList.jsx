@@ -6,7 +6,7 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./charList.scss";
 
-function CharList({ onSelectedChar }) {
+function CharList({ onSelectedChar, selectedChar }) {
   const [chars, setChars] = useState([]);
   const [page, setPage] = useState(1);
   const [offset, setOffset] = useState(9);
@@ -33,9 +33,15 @@ function CharList({ onSelectedChar }) {
 
   const cards = chars.slice(0, offset).map((character) => (
     <li
-      className="charlist__card"
+      className={
+        selectedChar === character.id
+          ? "charlist__card charlist__card-active"
+          : "charlist__card"
+      }
       key={character.id}
-      onClick={() => onSelectedChar(character.id)}
+      onClick={() => {
+        onSelectedChar(character.id);
+      }}
     >
       <img
         src={character.image}

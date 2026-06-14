@@ -27,8 +27,7 @@ function CharInfo({ selectedId }) {
   const skeleton = !char && !loading && !error ? <Skeleton /> : null;
   const errorMessage = error ? <ErrorMessage /> : null;
   const spinner = loading && !error ? <Spinner /> : null;
-  const content =
-    !loading && !error && !skeleton && char ? <List char={char} /> : null;
+  const content = !loading && !error && char ? <List char={char} /> : null;
 
   return (
     <>
@@ -41,9 +40,30 @@ function CharInfo({ selectedId }) {
 }
 
 function List({ char }) {
-  const episodes = char.episode.map((item, i) => (
+  const [showAll, setShowAll] = useState(false);
+
+  const _wikiPath = "https://rickandmorty.fandom.com/wiki/";
+
+  const status = useState(null);
+
+  const episodesList = char.episode;
+  const cutEpisodesList = episodesList.slice(0, 18);
+
+  const episodes = episodesList.map((item, i) => (
     <li className="charinfo__episode" key={i}>
-      {item}
+      <a href={item} target="_blank">
+        {item}
+      </a>
+
+      {i === cutEpisodesList.length - 1 &&
+        episodesList.length > 18 &&
+        !showAll && (
+          <div className="charinfo__plus" onClick={() => setShowAll(true)} />
+        )}
+
+      {i === episodesList.length - 1 && showAll && (
+        <div className="charinfo__minus" onClick={() => setShowAll(false)} />
+      )}
     </li>
   ));
 
@@ -53,23 +73,35 @@ function List({ char }) {
         <img src={char.image} alt={char.name} className="charinfo__img" />
         <div className="charinfo__info">
           <div className="charinfo__name">{char.name}</div>
-          <a href="#" className="charinfo__homepage">
-            homepage
+          <a
+            href={`https://rickandmortyapi.com/api/character/${char.id}`}
+            className="charinfo__homepage"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Homepage
           </a>
-          <a href="#" className="charinfo__wiki">
-            wiki
+
+          <a
+            className="charinfo__wiki"
+            href={`${_wikiPath}${char.name}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Wiki
           </a>
         </div>
       </div>
 
       <div className="charinfo__descr">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic, delectus
-        minus odit eum totam quo officia fuga beatae quaerat error?
+        {char.status} - {char.species}
       </div>
 
       <h3>Episodes:</h3>
 
-      <ul className="charinfo__episodes">{episodes.slice(0, 20)}</ul>
+      <ul className="charinfo__episodes">
+        {showAll ? episodes : episodes.slice(0, 18)}
+      </ul>
     </div>
   );
 }
