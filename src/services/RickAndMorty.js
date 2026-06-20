@@ -15,6 +15,11 @@ function useRickAndMorty() {
     return data.results.map(_tranformCharacter);
   };
 
+  const getEpisodes = async (page = 1) => {
+    const data = await request(`${_apiPath}episode/?page=${page}`);
+    return data.results.map(_tranformEpisode);
+  };
+
   const _tranformCharacter = (character) => {
     return {
       id: character.id,
@@ -26,7 +31,23 @@ function useRickAndMorty() {
     };
   };
 
-  return { loading, error, clearError, getCharacter, getCharacters };
+  const _tranformEpisode = (episode) => {
+    return {
+      id: episode.id,
+      name: episode.name,
+      date: episode.air_date,
+      characters: episode.characters,
+    };
+  };
+
+  return {
+    loading,
+    error,
+    clearError,
+    getCharacter,
+    getCharacters,
+    getEpisodes,
+  };
 }
 
 export default useRickAndMorty;

@@ -1,0 +1,29 @@
+@use "../../styles/variables.scss" as *;
+
+.bunner {
+  position: relative;
+  margin-top: 50px;
+  background-color: $dark-gray;
+  display: flex;
+  column-gap: 80px;
+  padding-left: 45px;
+  &__img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  &__text {
+    margin-top: 45px;
+    font-weight: 700;
+    font-size: 24px;
+    color: $white;
+  }
+  &__logo {
+    position: absolute;
+    width: 250px;
+    height: 100px;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
