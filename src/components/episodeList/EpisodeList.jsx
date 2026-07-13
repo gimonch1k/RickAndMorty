@@ -35,7 +35,9 @@ function EpisodeList() {
 
   const content = episodes.map((episode) => (
     <li className="episodelist__episode" key={episode.id}>
-      <img src={cover} alt={episode.name} className="episodelist__img" />
+      <Link to={`/episodes/${episode.id}`}>
+        <img src={cover} alt={episode.name} className="episodelist__img" />
+      </Link>
       <div className="episodelist__title">{episode.name}</div>
       <div className="episodelist__date">{episode.date}</div>
     </li>

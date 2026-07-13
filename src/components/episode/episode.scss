@@ -1,0 +1,42 @@
+@use "../../styles/variables.scss" as *;
+
+.episode {
+  position: relative;
+  margin-top: 50px;
+  display: flex;
+  column-gap: 50px;
+  &__img {
+    width: 293px;
+    height: 450px;
+    object-fit: cover;
+  }
+  &__descr {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+  }
+  &__title {
+    font-weight: 700;
+    font-size: 22px;
+  }
+  &__date {
+    font-size: 18px;
+  }
+  &__chars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    li {
+      width: 100px;
+    }
+  }
+  &__char:hover {
+    color: $light-gray;
+  }
+  &__back {
+    position: absolute;
+    right: 0;
+    font-weight: 700;
+    font-size: 18px;
+  }
+}

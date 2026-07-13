@@ -20,6 +20,11 @@ function useRickAndMorty() {
     return data.results.map(_tranformEpisode);
   };
 
+  const getEpisode = async (id) => {
+    const data = await request(`${_apiPath}episode/${id}`);
+    return _tranformEpisode(data);
+  };
+
   const _tranformCharacter = (character) => {
     return {
       id: character.id,
@@ -46,6 +51,7 @@ function useRickAndMorty() {
     clearError,
     getCharacter,
     getCharacters,
+    getEpisode,
     getEpisodes,
   };
 }

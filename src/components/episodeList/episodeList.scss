@@ -5,8 +5,8 @@
   margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
+  column-gap: 66px;
+  row-gap: 40px;
   &__episode {
     width: 225px;
   }
