@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useRickAndMorty from "../../services/RickAndMorty";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
+import StatusIndicator from "../statusIndicator/StatusIndicator";
 
 import "./randomChar.scss";
 
@@ -21,7 +22,7 @@ function RandomChar() {
 
   const onLoadChar = () => {
     clearError();
-    const random = Math.floor(Math.random() * 20) + 1;
+    const random = Math.floor(Math.random() * 826) + 1;
     getCharacter(random).then(setChar);
     console.log(random);
   };
@@ -62,7 +63,8 @@ function View({ char, wiki }) {
       <div className="randomchar__description">
         <div className="randomchar__name">{char.name}</div>
         <div className="randomchar__about">
-          {char.species} - {char.status}
+          {char.species} - {char.status}{" "}
+          {<StatusIndicator status={char.status} />}
         </div>
         <div className="randomchar__links">
           <a

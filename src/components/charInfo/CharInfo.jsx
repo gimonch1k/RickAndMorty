@@ -4,6 +4,7 @@ import useRickAndMorty from "../../services/RickAndMorty";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import Skeleton from "../skeleton/Skeleton";
+import StatusIndicator from "../statusIndicator/StatusIndicator";
 
 import "./charInfo.scss";
 
@@ -94,7 +95,8 @@ function List({ char }) {
       </div>
 
       <div className="charinfo__descr">
-        {char.status} - {char.species}
+        {char.species} - {char.status}{" "}
+        {<StatusIndicator status={char.status} />}
       </div>
 
       <h3>Episodes:</h3>

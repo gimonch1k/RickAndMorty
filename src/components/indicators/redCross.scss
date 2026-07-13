@@ -1,0 +1,25 @@
+@use "../../styles/variables.scss" as *;
+
+.redcross {
+  display: inline;
+  &::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    margin-left: 2px;
+    background-color: $red;
+    transform: rotateZ(45deg);
+    margin-top: 7px;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    margin-left: 2px;
+    background-color: $red;
+    transform: rotateZ(135deg);
+    margin-top: 7px;
+  }
+}
