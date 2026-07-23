@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import useRickAndMorty from "../../services/RickAndMorty";
 import Spinner from "../spinner/Spinner";
@@ -67,14 +68,9 @@ function View({ char, wiki }) {
           {<StatusIndicator status={char.status} />}
         </div>
         <div className="randomchar__links">
-          <a
-            href={`https://rickandmortyapi.com/api/character/${char.id}`}
-            className="randomchar__homepage"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <Link to={`/character/${char.id}`} className="randomchar__homepage">
             Homepage
-          </a>
+          </Link>
 
           <a
             className="randomchar__wiki"

@@ -58,15 +58,13 @@ function CharList({ onSelectedChar, selectedChar }) {
 
   return (
     <div className="charlist">
-      <ul className="charlist__cards">
-        {cards}
-        {spinner}
-        {errorMessage}
-      </ul>
+      {spinner}
+      {errorMessage}
+      <ul className="charlist__cards">{cards}</ul>
       <button
         className="charlist__btn"
         style={{ display: chars.length === 0 ? "none" : "block" }}
-        disabled={charsLoading}
+        disabled={loading}
         onClick={() => {
           const newOffset = offset + 9;
 

@@ -47,7 +47,7 @@ function EpisodeList() {
   const errorMessage = error ? <ErrorMessage /> : null;
 
   return (
-    <>
+    <section style={{ marginTop: "50px" }}>
       {spinner}
       {errorMessage}
       <ul className="episodelist">{content}</ul>
@@ -64,7 +64,7 @@ function EpisodeList() {
       >
         Load more
       </button>
-    </>
+    </section>
   );
 }
 

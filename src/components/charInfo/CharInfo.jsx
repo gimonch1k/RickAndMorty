@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import useRickAndMorty from "../../services/RickAndMorty";
 import Spinner from "../spinner/Spinner";
@@ -74,14 +75,9 @@ function List({ char }) {
         <img src={char.image} alt={char.name} className="charinfo__img" />
         <div className="charinfo__info">
           <div className="charinfo__name">{char.name}</div>
-          <a
-            href={`https://rickandmortyapi.com/api/character/${char.id}`}
-            className="charinfo__homepage"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <Link to={`/character/${char.id}`} className="charinfo__homepage">
             Homepage
-          </a>
+          </Link>
 
           <a
             className="charinfo__wiki"
