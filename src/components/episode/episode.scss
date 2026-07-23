@@ -4,39 +4,57 @@
   position: relative;
   margin-top: 50px;
   display: flex;
-  column-gap: 50px;
+  column-gap: 70px;
   &__img {
     width: 293px;
     height: 450px;
     object-fit: cover;
   }
-  &__descr {
-    display: flex;
-    flex-direction: column;
-    row-gap: 25px;
-  }
   &__title {
+    margin-top: 20px;
     font-weight: 700;
     font-size: 22px;
   }
   &__date {
+    margin-top: 15px;
     font-size: 18px;
   }
   &__chars {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    width: 512px;
+    row-gap: 20px;
+    column-gap: 38.5px;
+    align-content: flex-start;
     li {
-      width: 100px;
+      width: 145px;
+      height: fit-content;
+      text-align: center;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+      transition: all 0.4s ease;
+      &:hover {
+        transform: translateY(-2px);
+      }
     }
   }
-  &__char:hover {
-    color: $light-gray;
+  &__char {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 18px;
+    transition: all 0.4s ease;
+    &:hover {
+      color: $light-gray;
+    }
   }
   &__back {
     position: absolute;
     right: 0;
     font-weight: 700;
     font-size: 18px;
+    transition: all 0.4s ease;
+    &:hover {
+      color: $red;
+    }
   }
 }

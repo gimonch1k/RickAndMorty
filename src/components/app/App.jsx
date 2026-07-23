@@ -1,5 +1,11 @@
 import Header from "../header/Header";
-import { MainPage, Page404, EpisodesPage, SingleEpisodePage } from "../pages";
+import {
+  MainPage,
+  Page404,
+  EpisodesPage,
+  SingleEpisodePage,
+  SingleCharacterPage,
+} from "../pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.scss";
@@ -13,6 +19,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<MainPage />} />
+            <Route path="/character/:id" element={<SingleCharacterPage />} />
             <Route path="/episodes" element={<EpisodesPage />} />
             <Route path="/episodes/:id" element={<SingleEpisodePage />} />
             <Route path="*" element={<Page404 />} />

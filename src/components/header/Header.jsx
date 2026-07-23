@@ -1,8 +1,13 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 
 import "./header.scss";
 
 function Header() {
+  const location = useLocation();
+
+  const isCharactersActive =
+    location.pathname === "/" || location.pathname.startsWith("/character/");
+
   return (
     <header className="header">
       <Link to="/" className="header__portal">
@@ -10,7 +15,14 @@ function Header() {
       </Link>
 
       <div className="header__links">
-        <NavLink to="/" className="header__link">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive || isCharactersActive
+              ? "header__link active"
+              : "header__link"
+          }
+        >
           Characters
         </NavLink>
         <span className="header__divider">/</span>

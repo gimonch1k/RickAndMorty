@@ -3,10 +3,11 @@
 .skeleton {
   width: 425px;
   border-radius: 5px;
-  padding: 25px;
+  padding: 24.5px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
   &__title {
-    font-size: 17px;
+    font-size: 18px;
+    font-weight: 700;
     text-align: center;
   }
   &__header {

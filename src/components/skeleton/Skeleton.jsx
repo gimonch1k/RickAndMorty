@@ -6,9 +6,9 @@ class Skeleton extends Component {
   render() {
     return (
       <div className="skeleton">
-        <h2 className="skeleton__title">
+        <div className="skeleton__title">
           Please select a character to see information
-        </h2>
+        </div>
         <div className="skeleton__header">
           <div className="skeleton__header-circle"></div>
           <div className="skeleton__header-rect"></div>

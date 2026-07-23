@@ -3,6 +3,7 @@ import { useState } from "react";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
+import SearchPanel from "../searchPanel/SearchPanel";
 
 function MainPage() {
   const [selectedChar, setSelectedChar] = useState(null);
@@ -23,8 +24,18 @@ function MainPage() {
           onSelectedChar={setSelectedChar}
           selectedChar={selectedChar}
         />
-        <div style={{ position: "sticky", top: "50px", width: "425px" }}>
+        <div
+          style={{
+            position: "sticky",
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "30px",
+            top: "50px",
+            width: "425px",
+          }}
+        >
           <CharInfo selectedId={selectedChar} />
+          <SearchPanel />
         </div>
       </section>
     </>

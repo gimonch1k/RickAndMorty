@@ -35,19 +35,21 @@ function Episode({ charId }) {
 function View({ episode }) {
   return (
     <>
-      <img src={cover} alt="cover" className="episode__img" />
-
-      <div className="episode__descr">
+      <div className="episode__main">
+        <img src={cover} alt="cover" className="episode__img" />
         <div className="episode__title">{episode.name}</div>
         <div className="episode__date">{episode.date}</div>
-        <ul className="episode__chars">
-          {episode.characters.map((item, i) => (
-            <li key={i}>
-              <Link className="episode__char">{item.slice(32)}</Link>
-            </li>
-          ))}
-        </ul>
       </div>
+
+      <ul className="episode__chars">
+        {episode.characters.map((item, i) => (
+          <li key={i}>
+            <Link to={`/character/${item.slice(42)}`} className="episode__char">
+              Character {item.slice(42)}
+            </Link>
+          </li>
+        ))}
+      </ul>
 
       <Link to="/episodes" className="episode__back">
         Back to all

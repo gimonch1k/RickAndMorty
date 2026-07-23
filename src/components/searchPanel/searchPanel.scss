@@ -1,0 +1,56 @@
+@use "../../styles/button.scss" as *;
+@use "../../styles/variables.scss" as *;
+
+.searchpanel {
+  padding: 25px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+  &__title {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  &__wrapper {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__name {
+    border: none;
+    width: 250px;
+    height: 38px;
+    padding: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    &::placeholder {
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.5);
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+  &__find {
+    @include btn;
+    background-color: $red;
+  }
+  &__info {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__error {
+    margin-top: 25px;
+    font-weight: 700;
+    font-size: 18px;
+    color: $red;
+  }
+  &__success {
+    max-width: 250px;
+    font-weight: 700;
+    font-size: 18px;
+    color: $green;
+  }
+  &__topage {
+    @include btn;
+    background-color: $light-gray;
+    height: 38px;
+  }
+}

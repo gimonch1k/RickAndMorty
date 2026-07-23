@@ -46,7 +46,7 @@ function RandomChar() {
 
         <div className="randomchar__text">Or choose another one</div>
 
-        <button href="#" className="randomchar__try" onClick={onLoadChar}>
+        <button className="randomchar__try" onClick={onLoadChar}>
           Try it
         </button>
 

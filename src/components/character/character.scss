@@ -1,0 +1,49 @@
+@use "../../styles/variables.scss" as *;
+
+.character {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  column-gap: 70px;
+  &__name {
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 22px;
+  }
+  &__info {
+    margin-top: 15px;
+    font-size: 18px;
+  }
+  &__descr {
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 38.5px;
+    row-gap: 20px;
+    align-content: flex-start;
+  }
+  &__link {
+    width: 141px;
+    height: fit-content;
+    font-size: 18px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    text-align: center;
+    transition: all 0.4s ease;
+    &:hover {
+      transform: translateY(-2px);
+    }
+    a {
+      display: block;
+      padding: 10px 15px;
+      width: 100%;
+      transition: all 0.4s ease;
+    }
+    a:hover {
+      color: $light-gray;
+    }
+  }
+  &__back {
+    font-weight: 700;
+    font-size: 18px;
+  }
+}
