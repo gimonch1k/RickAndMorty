@@ -3,7 +3,7 @@ import { useHttp } from "../hooks/http.hook";
 function useRickAndMorty() {
   const _apiPath = "https://rickandmortyapi.com/api/";
 
-  const { loading, error, request, clearError } = useHttp();
+  const { request, clearError, process, setProcess } = useHttp();
 
   const getCharacter = async (id) => {
     const data = await request(`${_apiPath}character/${id}`);
@@ -51,8 +51,8 @@ function useRickAndMorty() {
   };
 
   return {
-    loading,
-    error,
+    process,
+    setProcess,
     clearError,
     getCharacter,
     getCharacters,

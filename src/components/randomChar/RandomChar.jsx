@@ -2,20 +2,17 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import useRickAndMorty from "../../services/RickAndMorty";
-import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
 import StatusIndicator from "../statusIndicator/StatusIndicator";
+import setContent from "../../utils/SetContent";
 
 import "./randomChar.scss";
 
 import logo from "../../assets/img/RickMortyLogo.png";
 
 function RandomChar() {
-  const _wikiPath = "https://rickandmorty.fandom.com/wiki/";
-
   const [char, setChar] = useState({});
 
-  const { loading, error, clearError, getCharacter } = useRickAndMorty();
+  const { clearError, getCharacter, process, setProcess } = useRickAndMorty();
 
   useEffect(() => {
     onLoadChar();
@@ -24,20 +21,15 @@ function RandomChar() {
   const onLoadChar = () => {
     clearError();
     const random = Math.floor(Math.random() * 826) + 1;
-    getCharacter(random).then(setChar);
+    getCharacter(random)
+      .then(setChar)
+      .then(() => setProcess("confirmed"));
     console.log(random);
   };
 
-  const errorMessage = error && !loading ? <ErrorMessage /> : null;
-  const spinner = loading ? <Spinner /> : null;
-  const content =
-    !loading && !error ? <View char={char} wiki={_wikiPath} /> : null;
-
   return (
     <div className="randomchar">
-      {errorMessage}
-      {spinner}
-      {content}
+      {setContent(process, View, char)}
 
       <div className="randomchar__right">
         <div className="randomchar__text">
@@ -57,24 +49,26 @@ function RandomChar() {
   );
 }
 
-function View({ char, wiki }) {
+function View({ data }) {
+  const _wikiPath = "https://rickandmorty.fandom.com/wiki/";
+
   return (
     <div className="randomchar__left">
-      <img src={char.image} alt={char.name} className="randomchar__img" />
+      <img src={data.image} alt={data.name} className="randomchar__img" />
       <div className="randomchar__description">
-        <div className="randomchar__name">{char.name}</div>
+        <div className="randomchar__name">{data.name}</div>
         <div className="randomchar__about">
-          {char.species} - {char.status}{" "}
-          {<StatusIndicator status={char.status} />}
+          {data.species} - {data.status}{" "}
+          {<StatusIndicator status={data.status} />}
         </div>
         <div className="randomchar__links">
-          <Link to={`/character/${char.id}`} className="randomchar__homepage">
+          <Link to={`/character/${data.id}`} className="randomchar__homepage">
             Homepage
           </Link>
 
           <a
             className="randomchar__wiki"
-            href={`${wiki}${char.name}`}
+            href={`${_wikiPath}${data.name}`}
             target="_blank"
             rel="noreferrer"
           >

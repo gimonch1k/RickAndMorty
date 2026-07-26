@@ -4,13 +4,15 @@
   margin-top: 50px;
   display: flex;
   justify-content: space-between;
+  align-items: start;
   column-gap: 70px;
   &__name {
     margin-top: 20px;
     font-weight: 700;
     font-size: 22px;
   }
-  &__info {
+  &__info,
+  &__id {
     margin-top: 15px;
     font-size: 18px;
   }
@@ -45,5 +47,8 @@
   &__back {
     font-weight: 700;
     font-size: 18px;
+    &:hover {
+      color: $red;
+    }
   }
 }

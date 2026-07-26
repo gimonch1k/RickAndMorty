@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import useRickAndMorty from "../../services/RickAndMorty";
-import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
-import Skeleton from "../skeleton/Skeleton";
 import StatusIndicator from "../statusIndicator/StatusIndicator";
+import setContent from "../../utils/SetContent";
 
 import "./charInfo.scss";
 
@@ -14,7 +12,8 @@ import rick from "../../assets/img/Rick.png";
 function CharInfo({ selectedId }) {
   const [char, setChar] = useState(null);
 
-  const { loading, error, getCharacter } = useRickAndMorty();
+  const { loading, error, getCharacter, process, setProcess } =
+    useRickAndMorty();
 
   useEffect(() => {
     onLoadChar();
@@ -23,32 +22,22 @@ function CharInfo({ selectedId }) {
   const onLoadChar = () => {
     if (!selectedId) return;
 
-    getCharacter(selectedId).then(setChar);
+    getCharacter(selectedId)
+      .then(setChar)
+      .then(() => setProcess("confirmed"));
   };
 
-  const skeleton = !char && !loading && !error ? <Skeleton /> : null;
-  const errorMessage = error ? <ErrorMessage /> : null;
-  const spinner = loading && !error ? <Spinner /> : null;
-  const content = !loading && !error && char ? <List char={char} /> : null;
-
-  return (
-    <>
-      {errorMessage}
-      {spinner}
-      {skeleton}
-      {content}
-    </>
-  );
+  return <>{setContent(process, List, char)}</>;
 }
 
-function List({ char }) {
+function List({ data }) {
   const [showAll, setShowAll] = useState(false);
 
   const _wikiPath = "https://rickandmorty.fandom.com/wiki/";
 
   const status = useState(null);
 
-  const episodesList = char.episode;
+  const episodesList = data.episode;
   const cutEpisodesList = episodesList.slice(0, 18);
 
   const episodes = episodesList.map((item, i) => (
@@ -72,16 +61,16 @@ function List({ char }) {
   return (
     <div className="charinfo">
       <div className="charinfo__persone">
-        <img src={char.image} alt={char.name} className="charinfo__img" />
+        <img src={data.image} alt={data.name} className="charinfo__img" />
         <div className="charinfo__info">
-          <div className="charinfo__name">{char.name}</div>
-          <Link to={`/character/${char.id}`} className="charinfo__homepage">
+          <div className="charinfo__name">{data.name}</div>
+          <Link to={`/character/${data.id}`} className="charinfo__homepage">
             Homepage
           </Link>
 
           <a
             className="charinfo__wiki"
-            href={`${_wikiPath}${char.name}`}
+            href={`${_wikiPath}${data.name}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -91,8 +80,8 @@ function List({ char }) {
       </div>
 
       <div className="charinfo__descr">
-        {char.species} - {char.status}{" "}
-        {<StatusIndicator status={char.status} />}
+        {data.species} - {data.status}{" "}
+        {<StatusIndicator status={data.status} />}
       </div>
 
       <h3>Episodes:</h3>

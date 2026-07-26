@@ -6,65 +6,80 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./charList.scss";
 
+function setContent(process, Component, charsLoading) {
+  switch (process) {
+    case "waiting":
+      return <Spinner />;
+    case "loading":
+      return charsLoading ? <Component /> : <Spinner />;
+    case "confirmed":
+      return <Component />;
+    case "error":
+      return <ErrorMessage />;
+    default:
+      throw new Error("Unexpected process state");
+  }
+}
+
 function CharList({ onSelectedChar, selectedChar }) {
   const [chars, setChars] = useState([]);
   const [page, setPage] = useState(1);
   const [offset, setOffset] = useState(9);
   const [charsLoading, setCharsLoading] = useState(false);
 
-  const { loading, error, getCharacters } = useRickAndMorty();
+  const { getCharacters, process, setProcess } = useRickAndMorty();
 
   useEffect(() => {
-    onRequest(page);
+    onRequest(page, true);
   }, []);
 
-  const onRequest = (page) => {
-    setCharsLoading(true);
-    getCharacters(page).then(onLoadChars);
+  const onRequest = (page, initial = false) => {
+    initial ? setCharsLoading(false) : setCharsLoading(true);
+    getCharacters(page)
+      .then(onLoadChars)
+      .then(() => setProcess("confirmed"));
   };
 
   const onLoadChars = (newChars) => {
     setChars((prevChars) =>
       chars.length === 0 ? newChars : [...prevChars, ...newChars],
     );
-
     setCharsLoading(false);
   };
 
-  const cards = chars.slice(0, offset).map((character) => (
-    <li
-      className={
-        selectedChar === character.id
-          ? "charlist__card charlist__card-active"
-          : "charlist__card"
-      }
-      key={character.id}
-      onClick={() => {
-        onSelectedChar(character.id);
-      }}
-    >
-      <img
-        src={character.image}
-        alt={character.name}
-        className="charlist__img"
-      />
+  const createCards = (chars) => {
+    return chars.slice(0, offset).map((character) => (
+      <li
+        className={
+          selectedChar === character.id
+            ? "charlist__card charlist__card-active"
+            : "charlist__card"
+        }
+        key={character.id}
+        onClick={() => {
+          onSelectedChar(character.id);
+        }}
+      >
+        <img
+          src={character.image}
+          alt={character.name}
+          className="charlist__img"
+        />
 
-      <div className="charlist__name">{character.name}</div>
-    </li>
-  ));
-
-  const spinner = loading && chars.length === 0 ? <Spinner /> : null;
-  const errorMessage = error ? <ErrorMessage /> : null;
+        <div className="charlist__name">{character.name}</div>
+      </li>
+    ));
+  };
 
   return (
     <div className="charlist">
-      {spinner}
-      {errorMessage}
-      <ul className="charlist__cards">{cards}</ul>
+      <ul className="charlist__cards">
+        {setContent(process, () => createCards(chars), charsLoading)}
+      </ul>
       <button
         className="charlist__btn"
         style={{ display: chars.length === 0 ? "none" : "block" }}
-        disabled={loading}
+        disabled={process === "loading"}
         onClick={() => {
           const newOffset = offset + 9;
 
